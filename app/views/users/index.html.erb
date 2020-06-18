@@ -1,0 +1,9 @@
+
+  <% @users.each do |user| %>
+    <div class="row">
+    	<%= attachment_image_tag user, :profile_image, :fill,50, 50, class: "img-round" %>
+    	<%= link_to user_path(user) do %>
+    	  <%= user.name %>
+    	<% end %>
+    </div>
+  <% end %>

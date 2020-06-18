@@ -1,0 +1,25 @@
+<header class="bg-primary">
+	<div class="container">
+    <div class="row">
+    	<div class="col-4">
+    	  <%= link_to root_path do %><p class="text-white"><i class="far fa-comments header-icon"></i> Chat app</p><% end %>
+      </div>
+      <div class="col-4"></div>
+ <!-- ---------------ログイン時--------------------- -->
+      <div class="col-4">
+  	  <% if user_signed_in? %>
+        <%= link_to user_path(current_user) do %>
+          <div class="btn btn-outline-light">My page</div>
+  	    <% end %>
+  	    <%= link_to users_path do %>
+          <div class="btn btn-outline-light">Users</div>
+  	    <% end %>
+  	    <%= link_to destroy_user_session_path, method: :delete  do %>
+  	      <div class="btn btn-outline-light">Log out</div>
+  	    <% end %>
+<!-- ----------------------非ログイン時--------------- -->
+      <% end %>
+      </div>
+    </div>
+  </div>
+</header>

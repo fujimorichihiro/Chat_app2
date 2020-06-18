@@ -1,0 +1,31 @@
+<div class="center">
+	<i class="far fa-comments top-icon"></i>
+	<h3>Chat_app2</h3>
+	<P>by mori</P>
+</div>
+<div class="row">
+	<div class="col-4"></div>
+	<div class="col-4">
+	  <% if user_signed_in? %>
+	    <%= link_to users_path do %>
+  	      <div class="btn btn-primary btn-block">Go To Chat!</div>
+  	    <% end %>
+      <% else %>
+  	    <%= link_to new_user_session_path do %>
+  	      <div class="btn btn-primary btn-block">Log in</div>
+  	    <% end %>
+  	  <% end %>
+  	  <div class="row" style="height: 50px;"></div>
+  	  <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    about
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+           ActionCableを諦めてAjaxを使ったChatアプリ。
+        </div>
+       </div>
+	</div>
+	<div class="col-4"></div>
+</div>
