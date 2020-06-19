@@ -1,13 +1,100 @@
+
 <div class="row" style="height: 50px;"></div>
-<h1><%= @user.name %>のプロフィール</h1>
-<%= attachment_image_tag @user, :profile_image, :fill,100, 100, class: "img-circle"%>
+<div class="row">
+  <%= attachment_image_tag @user, :profile_image, :fill,100, 100, class: "rounded-circle"%>
+</div>
+<div class="row mb-5">
+	<div class="col-3">
+    <h3><%= @user.name %></h3>
+  </div>
+  <div class="col-5"></div>
+  <div class="col-4">
+  	<% unless current_user == @user %>
+  	  <div class="btn btn-warning rounded-circle"><i class="fas fa-envelope text-white"></i></div>
+      <% if current_user.following?(@user) %>
+        <%= link_to relationships_path(followed_id: @user.id), method: :delete do %>
+          <div class="btn btn-danger">unfollow</div>
+        <% end %>
+      <% else %>
+        <%= link_to relationships_path(followed_id: @user.id), method: :post do %>
+          <div class="btn btn-outline-warning">follow</div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if @user == current_user %>
+      <%= link_to edit_user_path(@user) do %>
+        <div class="btn btn-warning">edit profile</div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row mb-5">
+	<%= @user.following.count %> following <%= @user.followers.count%> follower
+</div>
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-11">
+  	<% @user.posts.each do |post| %>
+  	  <div class="border border-light">
+        <div class="row">
+      	  <div class="col-1">
+      	  	<%= link_to user_path(post.user) do %>
+      	      <%= attachment_image_tag post.user, :profile_image, :fill, 50, 50, class: "rounded-circle"%>
+      	    <% end %>
+      	  </div>
+      	  <div class="col-11">
+      	  	<div class="row" style="height: 20px;"></div>
+      	    <p class="text-secondary">@<%= post.user.name %></p>
+      	    <%= post.content %>
+            <div><%= attachment_image_tag post, :content_image, :fill, 600, 400, class: "rounded mt-2 mb-2"%></div>
+      	  </div>
+        </div>
+        <div class="row" style="height: 5px;"></div>
+        <div class="row">
+         	<div class="col-1"></div>
+        	<div class="col-1">
+        		<i class="fas fa-comment"></i>
+        	</div>
+        	<div class="col-7">
+        		<i class="fas fa-heart"></i>
+        	</div>
+        	<div class="col-3">
+        		<p><%= post.created_at %></p>
+        	</div>
+        </div>
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-11">
+            <p>
+              <a data-toggle="collapse" href="#collapseExample<%= post.id %>" role="button" aria-expanded="false" aria-controls="collapseExample<%= post.id %>">
+                <i class="fas fa-map-marker-alt text-secondary"></i><span class="text-secondary">  <%= post.address %></span>
+              </a>
+            </p>
+            <div class="collapse" id="collapseExample<%= post.id %>">
+              <div class="card card-body">
+                <script type="text/javascript">
+                  function initMap(){
+                   let map = new google.maps.Map(document.getElementById('map<%= post.id%>'), {
+                   center: {lat: <%= post.latitude %>, lng: <%= post.longitude %>},
+                   zoom: 15
+                  });
+                }
+                </script>
+                <style>
+                  #map<%= post.id%> {
+                    height: 500px;
+                  }
+                </style>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSMWvs0L9yrcuEvacnZi_1uzjP0QADFkk&callback=initMap" async defer></script>
+                <div id="map<%= post.id%>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 
-<%= link_to edit_user_path(@user) do %>
-  <div class="btn btn-success">編集</div>
-<% end %>
 
-<div class="row" style="height: 20px;"></div>
-<% if @user != current_user %>
-  <div class="btn btn-success">チャットを送る。</div>
-<% end %>
