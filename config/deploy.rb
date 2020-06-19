@@ -2,7 +2,7 @@
 lock "~> 3.14.1"
 
 set :application, "Chat_app2"
-set :repo_url, "https://github.com/fujimorichihiro/Chat_app2.git"
+set :repo_url, "https://github.com/fujimorichihiro/Chat_app2"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
