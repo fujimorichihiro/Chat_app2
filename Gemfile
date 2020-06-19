@@ -22,6 +22,8 @@ gem 'dotenv-rails'
 gem 'refile', require: "refile/rails", github: 'manfe/refile' #画像
 gem 'refile-mini_magick' #画像
 gem 'geocoder'
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
