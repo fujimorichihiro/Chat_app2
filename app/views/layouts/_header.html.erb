@@ -8,6 +8,9 @@
  <!-- ---------------ログイン時--------------------- -->
       <div class="col-4">
   	  <% if user_signed_in? %>
+        <%= link_to posts_path do %>
+          <div class="btn btn-outline-light">Timeline</div>
+        <% end %>
         <%= link_to user_path(current_user) do %>
           <div class="btn btn-outline-light">My page</div>
   	    <% end %>

@@ -85,7 +85,7 @@
                     height: 500px;
                   }
                 </style>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSMWvs0L9yrcuEvacnZi_1uzjP0QADFkk&callback=initMap" async defer></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
                 <div id="map<%= post.id%>"></div>
               </div>
             </div>
