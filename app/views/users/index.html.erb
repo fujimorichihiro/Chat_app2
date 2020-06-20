@@ -8,6 +8,7 @@
     	<%= link_to user_path(user) do %>
     	  <%= user.name %>
     	<% end %>
+      <%= @user.following.count %> following <%= @user.followers.count%> follower
       </div>
       <div class="col-9">
       	<% unless current_user == user %>
